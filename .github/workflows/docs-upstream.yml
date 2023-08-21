@@ -8,6 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'master'
@@ -52,11 +53,10 @@ jobs:
           retention-days: 1
 
   validate:
-    uses: docker/docs/.github/workflows/validate-upstream.yml@main
+    uses: dvdksn/docs/.github/workflows/validate-upstream.yml@hugo2
     needs:
       - docs-yaml
     with:
-      repo: https://github.com/${{ github.repository }}
       data-files-id: docs-yaml
       data-files-folder: buildx
       data-files-placeholder-folder: engine/reference/commandline
