@@ -19,6 +19,7 @@ on:
     paths:
       - '.github/workflows/docs-upstream.yml'
       - 'docs/**'
+  workflow_dispatch:
 
 jobs:
   docs-yaml:
@@ -52,11 +53,11 @@ jobs:
           retention-days: 1
 
   validate:
-    uses: docker/docs/.github/workflows/validate-upstream.yml@main
+    uses: dvdksn/docs/.github/workflows/validate-upstream.yml@b04b8d8e7b98dc3a191bcfd6f9505a8f0abc3f51
     needs:
       - docs-yaml
     with:
-      repo: https://github.com/${{ github.repository }}
+      module-name: docker/buildx
       data-files-id: docs-yaml
       data-files-folder: buildx
       data-files-placeholder-folder: engine/reference/commandline
